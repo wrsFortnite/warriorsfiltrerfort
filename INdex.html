@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WarriorsFortnite - Comunidad de Fortnite</title>
+    <title>WarriorsFortnite</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Variables y estilos generales */
         :root {
-            --primary: #ff4655;
-            --secondary: #1e1e2e;
-            --accent: #00c8ff;
-            --light: #f5f5f5;
-            --dark: #121212;
+            --primary: #ff7b25;
+            --secondary: #2d1b33;
+            --accent: #8a2be2;
+            --light: #f5e6cc;
+            --dark: #1a0f1f;
+            --halloween-orange: #ff7b25;
+            --halloween-purple: #8a2be2;
+            --halloween-green: #00ff7f;
         }
         
         * {
@@ -26,6 +29,7 @@
             background-color: var(--dark);
             color: var(--light);
             line-height: 1.6;
+            background-image: url('https://www.transparenttextures.com/patterns/black-paper.png');
         }
         
         a {
@@ -47,39 +51,52 @@
             text-align: center;
             margin-bottom: 50px;
             font-size: 2.5rem;
-            color: var(--primary);
+            color: var(--halloween-orange);
             text-transform: uppercase;
             letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--halloween-orange), var(--halloween-purple));
+            margin: 15px auto;
+            border-radius: 2px;
         }
         
         .btn {
             display: inline-block;
             padding: 12px 30px;
-            background-color: var(--primary);
+            background: linear-gradient(45deg, var(--halloween-orange), var(--halloween-purple));
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 30px;
             cursor: pointer;
             font-weight: bold;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(255, 123, 37, 0.3);
         }
         
         .btn:hover {
-            background-color: #e03e4c;
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 70, 85, 0.4);
+            box-shadow: 0 6px 15px rgba(255, 123, 37, 0.5);
         }
         
         /* Header y navegación */
         header {
-            background-color: rgba(18, 18, 18, 0.95);
+            background-color: rgba(26, 15, 31, 0.95);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            border-bottom: 2px solid var(--halloween-orange);
         }
         
         .navbar {
@@ -94,15 +111,19 @@
             align-items: center;
         }
         
-        .logo img {
-            height: 50px;
-            margin-right: 10px;
+        .logo-video {
+            height: 100px; /* DUPLICADO: de 50px a 100px */
+            width: auto;
+            border-radius: 12px; /* Aumentado para coincidir con el nuevo tamaño */
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(255, 123, 37, 0.7); /* Sombra más pronunciada */
+            border: 2px solid var(--halloween-orange); /* Borde añadido para mejor visibilidad */
         }
         
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary);
+        .logo-video video {
+            height: 100%;
+            width: auto;
+            display: block;
         }
         
         .nav-links {
@@ -122,7 +143,7 @@
         }
         
         .nav-links a:hover {
-            color: var(--primary);
+            color: var(--halloween-orange);
         }
         
         .nav-links a::after {
@@ -132,7 +153,7 @@
             height: 2px;
             bottom: -5px;
             left: 0;
-            background-color: var(--primary);
+            background-color: var(--halloween-orange);
             transition: width 0.3s ease;
         }
         
@@ -144,11 +165,12 @@
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
+            color: var(--halloween-orange);
         }
         
         /* Hero Section con Carrusel */
         .hero {
-            margin-top: 80px;
+            margin-top: 100px; /* Aumentado para compensar el header más grande */
             position: relative;
             height: 80vh;
             overflow: hidden;
@@ -178,16 +200,19 @@
         
         .slide-content {
             text-align: center;
-            background-color: rgba(18, 18, 18, 0.7);
+            background-color: rgba(45, 27, 51, 0.85);
             padding: 30px;
-            border-radius: 10px;
-            max-width: 600px;
+            border-radius: 15px;
+            max-width: 700px;
+            border: 2px solid var(--halloween-orange);
+            box-shadow: 0 0 20px rgba(255, 123, 37, 0.5);
         }
         
         .slide-content h2 {
             font-size: 2.5rem;
             margin-bottom: 20px;
-            color: var(--primary);
+            color: var(--halloween-orange);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
         
         .slide-content p {
@@ -214,7 +239,7 @@
         }
         
         .carousel-dot.active {
-            background-color: var(--primary);
+            background-color: var(--halloween-orange);
         }
         
         .carousel-nav {
@@ -228,10 +253,16 @@
             padding: 10px 15px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .carousel-nav:hover {
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(255, 123, 37, 0.8);
         }
         
         .carousel-prev {
@@ -254,10 +285,13 @@
             border-radius: 10px;
             overflow: hidden;
             transition: transform 0.3s ease;
+            border: 1px solid var(--halloween-purple);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
         
         .news-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
         }
         
         .news-img {
@@ -271,7 +305,7 @@
         }
         
         .news-date {
-            color: var(--accent);
+            color: var(--halloween-green);
             font-size: 0.9rem;
             margin-bottom: 10px;
         }
@@ -279,7 +313,7 @@
         .news-title {
             font-size: 1.3rem;
             margin-bottom: 10px;
-            color: var(--primary);
+            color: var(--halloween-orange);
         }
         
         /* Sección Acerca de Nosotros */
@@ -299,34 +333,15 @@
             background-size: cover;
             background-position: center;
             border-radius: 10px;
+            border: 2px solid var(--halloween-orange);
+            box-shadow: 0 0 15px rgba(255, 123, 37, 0.4);
         }
         
         /* Sección Filtraciones */
-        .filters {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-        
-        .filter-btn {
-            padding: 10px 20px;
-            background-color: var(--secondary);
-            color: var(--light);
-            border: none;
-            margin: 0 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-        
-        .filter-btn.active {
-            background-color: var(--primary);
-        }
-        
         .leaks-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
         }
         
         .leak-card {
@@ -334,10 +349,13 @@
             border-radius: 10px;
             overflow: hidden;
             transition: transform 0.3s ease;
+            border: 1px solid var(--halloween-purple);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
         
         .leak-card:hover {
-            transform: scale(1.05);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.4);
         }
         
         .leak-img {
@@ -347,13 +365,52 @@
         }
         
         .leak-info {
-            padding: 15px;
+            padding: 20px;
+        }
+        
+        .leak-date {
+            color: var(--halloween-green);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
         
         .leak-title {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            color: var(--accent);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--halloween-orange);
+        }
+        
+        .leak-credits {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .credit-text {
+            font-size: 0.9rem;
+            color: var(--light);
+            margin-right: 10px;
+        }
+        
+        .credit-author {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            color: var(--halloween-green);
+        }
+        
+        .credit-logo {
+            width: 20px;
+            height: 20px;
+            margin-left: 8px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
         }
         
         /* Sección Reclutamiento */
@@ -362,7 +419,9 @@
             margin: 0 auto;
             background-color: var(--secondary);
             padding: 40px;
-            border-radius: 10px;
+            border-radius: 15px;
+            border: 2px solid var(--halloween-orange);
+            box-shadow: 0 0 20px rgba(255, 123, 37, 0.3);
         }
         
         .form-group {
@@ -373,6 +432,7 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
+            color: var(--halloween-orange);
         }
         
         .form-control {
@@ -387,7 +447,8 @@
         
         .form-control:focus {
             outline: none;
-            border-color: var(--primary);
+            border-color: var(--halloween-orange);
+            box-shadow: 0 0 5px rgba(255, 123, 37, 0.5);
         }
         
         textarea.form-control {
@@ -424,10 +485,12 @@
             padding: 20px;
             border-radius: 10px;
             transition: transform 0.3s ease;
+            border: 1px solid var(--halloween-purple);
         }
         
         .collaborator-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
         }
         
         .collaborator-img {
@@ -437,17 +500,17 @@
             margin: 0 auto 15px;
             background-size: cover;
             background-position: center;
-            border: 3px solid var(--primary);
+            border: 3px solid var(--halloween-orange);
         }
         
         .collaborator-name {
             font-size: 1.2rem;
             margin-bottom: 5px;
-            color: var(--primary);
+            color: var(--halloween-orange);
         }
         
         .collaborator-role {
-            color: var(--accent);
+            color: var(--halloween-green);
             font-size: 0.9rem;
         }
         
@@ -455,6 +518,7 @@
         footer {
             background-color: var(--secondary);
             padding: 50px 0 20px;
+            border-top: 2px solid var(--halloween-orange);
         }
         
         .footer-content {
@@ -471,7 +535,7 @@
         }
         
         .footer-column h3 {
-            color: var(--primary);
+            color: var(--halloween-orange);
             margin-bottom: 20px;
             font-size: 1.3rem;
         }
@@ -489,7 +553,7 @@
         }
         
         .footer-links a:hover {
-            color: var(--primary);
+            color: var(--halloween-orange);
         }
         
         .social-links {
@@ -510,7 +574,7 @@
         }
         
         .social-link:hover {
-            background-color: var(--primary);
+            background-color: var(--halloween-orange);
             transform: translateY(-5px);
         }
         
@@ -520,6 +584,81 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             font-size: 0.9rem;
             color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Efectos Halloween */
+        .halloween-decoration {
+            position: absolute;
+            z-index: -1;
+        }
+        
+        .pumpkin {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: var(--halloween-orange);
+            border-radius: 50%;
+            top: 20px;
+            right: 5%;
+        }
+        
+        .pumpkin::before, .pumpkin::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 30px;
+            background-color: var(--dark);
+            border-radius: 50%;
+            top: 15px;
+        }
+        
+        .pumpkin::before {
+            left: 10px;
+        }
+        
+        .pumpkin::after {
+            right: 10px;
+        }
+        
+        .pumpkin .mouth {
+            position: absolute;
+            width: 30px;
+            height: 15px;
+            background-color: var(--dark);
+            border-radius: 0 0 15px 15px;
+            bottom: 10px;
+            left: 15px;
+        }
+        
+        .bat {
+            position: absolute;
+            width: 40px;
+            height: 20px;
+            background-color: var(--dark);
+            border-radius: 50%;
+            top: 10%;
+            left: 10%;
+            transform: rotate(-30deg);
+        }
+        
+        .bat::before, .bat::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 30px;
+            background-color: var(--dark);
+            border-radius: 50%;
+            top: -10px;
+        }
+        
+        .bat::before {
+            left: -5px;
+            transform: rotate(-20deg);
+        }
+        
+        .bat::after {
+            right: -5px;
+            transform: rotate(20deg);
         }
         
         /* Responsive */
@@ -537,13 +676,14 @@
             .nav-links {
                 display: none;
                 position: absolute;
-                top: 80px;
+                top: 100px; /* Aumentado para el header más grande */
                 left: 0;
                 width: 100%;
                 background-color: var(--secondary);
                 flex-direction: column;
                 padding: 20px;
                 box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+                border-top: 2px solid var(--halloween-orange);
             }
             
             .nav-links.active {
@@ -560,6 +700,7 @@
             
             .hero {
                 height: 60vh;
+                margin-top: 100px; /* Mantenido para el header más grande */
             }
             
             .slide-content h2 {
@@ -569,16 +710,29 @@
             .section-title {
                 font-size: 2rem;
             }
+            
+            .logo-video {
+                height: 80px; /* Reducido pero aún más grande que el original */
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Decoraciones Halloween -->
+    <div class="halloween-decoration pumpkin"></div>
+    <div class="halloween-decoration bat"></div>
+
     <!-- Header y Navegación -->
     <header>
         <div class="container">
             <nav class="navbar">
                 <div class="logo">
-                    <div class="logo-text">WarriorsFortnite</div>
+                    <div class="logo-video">
+                        <video autoplay muted loop playsinline>
+                            <source src="icono-warriors.mp4" type="video/mp4">
+                            Tu navegador no soporta el elemento de video.
+                        </video>
+                    </div>
                 </div>
                 <ul class="nav-links">
                     <li><a href="#inicio">Inicio</a></li>
@@ -616,27 +770,27 @@
             <h2 class="section-title">Novedades</h2>
             <div class="news-grid">
                 <div class="news-card">
-                    <div class="news-img" style="background-image: url('https://via.placeholder.com/300x200');"></div>
+                    <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
                     <div class="news-content">
-                        <div class="news-date">15 de Octubre, 2023</div>
-                        <h3 class="news-title">Nuevo Pase de Batalla Temporada 5</h3>
-                        <p>Descubre todos los detalles del nuevo pase de batalla y sus recompensas exclusivas.</p>
+                        <div class="news-date">28 de Octubre, 2023</div>
+                        <h3 class="news-title">Nuevas Misiones Disponibles</h3>
+                        <p>Descubre las nuevas misiones disponibles en Salvar el Mundo con recompensas exclusivas.</p>
                     </div>
                 </div>
                 <div class="news-card">
-                    <div class="news-img" style="background-image: url('https://via.placeholder.com/300x200');"></div>
+                    <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
                     <div class="news-content">
-                        <div class="news-date">12 de Octubre, 2023</div>
-                        <h3 class="news-title">Torneo Comunitario Warriors</h3>
-                        <p>Participa en nuestro torneo mensual con premios exclusivos para los mejores jugadores.</p>
+                        <div class="news-date">25 de Octubre, 2023</div>
+                        <h3 class="news-title">Actualización de Temporada</h3>
+                        <p>Conoce todos los detalles de la nueva actualización de temporada en Fortnite.</p>
                     </div>
                 </div>
                 <div class="news-card">
-                    <div class="news-img" style="background-image: url('https://via.placeholder.com/300x200');"></div>
+                    <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
                     <div class="news-content">
-                        <div class="news-date">10 de Octubre, 2023</div>
-                        <h3 class="news-title">Actualización de Balance de Armas</h3>
-                        <p>Conoce todos los cambios en el balance de armas de la última actualización.</p>
+                        <div class="news-date">22 de Octubre, 2023</div>
+                        <h3 class="news-title">Eventos Comunitarios</h3>
+                        <p>Participa en nuestros eventos comunitarios y gana premios exclusivos.</p>
                     </div>
                 </div>
             </div>
@@ -658,8 +812,9 @@
                         <li>Eventos especiales y torneos</li>
                     </ul>
                     <p>Nuestro objetivo es crear un ambiente amigable y competitivo donde todos los jugadores puedan mejorar y disfrutar del juego juntos.</p>
+                    <p>¡Y ahora con nuestro nuevo canal de Discord, la comunicación es aún más fácil y organizada!</p>
                 </div>
-                <div class="about-img" style="background-image: url('https://via.placeholder.com/600x400');"></div>
+                <div class="about-img" style="background-image: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
             </div>
         </div>
     </section>
@@ -668,39 +823,47 @@
     <section id="filtraciones" class="section">
         <div class="container">
             <h2 class="section-title">Filtraciones</h2>
-            <div class="filters">
-                <button class="filter-btn active" data-filter="all">Todo</button>
-                <button class="filter-btn" data-filter="skins">Skins</button>
-                <button class="filter-btn" data-filter="armas">Armas</button>
-                <button class="filter-btn" data-filter="eventos">Eventos</button>
-            </div>
             <div class="leaks-container">
-                <div class="leak-card" data-category="skins">
-                    <div class="leak-img" style="background-image: url('https://via.placeholder.com/250x200');"></div>
+                <!-- Filtración 2: LA ACTUALIZACIÓN v37.51 (Más nueva) -->
+                <div class="leak-card">
+                    <div class="leak-img" style="background-image: url('actualizacion-v37.jpg');"></div>
                     <div class="leak-info">
-                        <h3 class="leak-title">Nueva Skin Épica: Cyber Samurai</h3>
-                        <p>Próximamente en la tienda de objetos</p>
+                        <div class="leak-date">
+                            <span>Lunes 21 de Octubre, 2025</span>
+                        </div>
+                        <h3 class="leak-title">LA ACTUALIZACIÓN v37.51 LLEGA MAÑANA</h3>
+                        <p>HORARIOS:<br>
+                        ➤🇭🇳,🇸🇻,🇬🇹,🇳🇮,🇨🇷 y 🇲🇽 02:00am<br>
+                        ➤🇪🇨,🇵🇦,🇨🇴 y 🇵🇪 3:00am<br>
+                        ➤🇧🇴,🇻🇪,🇵🇷,🇩🇴,🇺🇸 y 🇨🇺 04:00am<br>
+                        ➤🇧🇷,🇺🇾,🇦🇷,🇵🇾 y 🇨🇱 05:00am<br>
+                        ➤🇪🇸 y 🇵🇱 10:00am</p>
+                        <div class="leak-credits">
+                            <span class="credit-text">Créditos:</span>
+                            <span class="credit-author">
+                                Toxic
+                                <div class="credit-logo" style="background-image: url('toxic.jpg');"></div>
+                            </span>
+                        </div>
                     </div>
                 </div>
-                <div class="leak-card" data-category="armas">
-                    <div class="leak-img" style="background-image: url('https://via.placeholder.com/250x200');"></div>
+                
+                <!-- Filtración 1: Salvar al Mundo (Más antigua) -->
+                <div class="leak-card">
+                    <div class="leak-img" style="background-image: url('salvar-mundo-hexsylvania.jpg');"></div>
                     <div class="leak-info">
-                        <h3 class="leak-title">Nuevo Rifle de Asalto Mítico</h3>
-                        <p>Estadísticas y características filtradas</p>
-                    </div>
-                </div>
-                <div class="leak-card" data-category="eventos">
-                    <div class="leak-img" style="background-image: url('https://via.placeholder.com/250x200');"></div>
-                    <div class="leak-info">
-                        <h3 class="leak-title">Evento Especial de Halloween</h3>
-                        <p>Detalles del próximo evento temático</p>
-                    </div>
-                </div>
-                <div class="leak-card" data-category="skins">
-                    <div class="leak-img" style="background-image: url('https://via.placeholder.com/250x200');"></div>
-                    <div class="leak-info">
-                        <h3 class="leak-title">Pack de Inicio Temporada 5</h3>
-                        <p>Contenido y precio filtrado</p>
+                        <div class="leak-date">
+                            <span>Domingo 19 de Octubre, 2025</span>
+                        </div>
+                        <h3 class="leak-title">Salvar al Mundo</h3>
+                        <p>Solo queda 1 mes para que termine la temporada de Hexsylvania en Salvar el Mundo. ¡Aprovecha para completar todas las misiones y obtener las recompensas exclusivas antes de que sea demasiado tarde!</p>
+                        <div class="leak-credits">
+                            <span class="credit-text">Créditos:</span>
+                            <span class="credit-author">
+                                Toxic
+                                <div class="credit-logo" style="background-image: url('toxic.jpg');"></div>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -710,11 +873,11 @@
     <!-- Sección Grupo de WhatsApp -->
     <section id="grupo" class="section">
         <div class="container">
-            <h2 class="section-title">Grupo de WhatsApp</h2>
+            <h2 class="section-title">Grupo de WhatsApp y Discord</h2>
             <div class="about-content">
-                <div class="about-img" style="background-image: url('https://via.placeholder.com/600x400');"></div>
+                <div class="about-img" style="background-image: url('https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
                 <div class="about-text">
-                    <p>Nuestro grupo de WhatsApp es el centro de nuestra comunidad. Aquí es donde:</p>
+                    <p>Nuestro grupo de WhatsApp y canal de Discord son el centro de nuestra comunidad. Aquí es donde:</p>
                     <ul>
                         <li>Organizamos partidas en todos los modos de juego</li>
                         <li>Compartimos estrategias y consejos</li>
@@ -723,6 +886,7 @@
                         <li>Ayudamos a nuevos jugadores</li>
                     </ul>
                     <p>Si quieres unirte a nuestro grupo, completa el formulario de reclutamiento y te contactaremos por WhatsApp para invitarte.</p>
+                    <p><strong>¡También tenemos un canal de Discord para mejor organización!</strong></p>
                     <a href="#reclutamiento" class="btn">Solicitar Ingreso</a>
                 </div>
             </div>
@@ -732,35 +896,36 @@
     <!-- Sección Colaboradores y Canales -->
     <section id="colaboradores" class="section">
         <div class="container">
-            <h2 class="section-title">Colaboradores y Canales</h2>
+            <h2 class="section-title">Fundadores y Colaboradores</h2>
             <div class="collaborators-grid">
                 <div class="collaborator-card">
-                    <div class="collaborator-img" style="background-image: url('https://via.placeholder.com/100');"></div>
+                    <div class="collaborator-img" style="background-image: url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
                     <h3 class="collaborator-name">AlexGamer</h3>
-                    <p class="collaborator-role">Líder del Grupo</p>
+                    <p class="collaborator-role">Fundador y Líder</p>
                 </div>
                 <div class="collaborator-card">
-                    <div class="collaborator-img" style="background-image: url('https://via.placeholder.com/100');"></div>
+                    <div class="collaborator-img" style="background-image: url('https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
                     <h3 class="collaborator-name">FortnitePro</h3>
-                    <p class="collaborator-role">Organizador de Torneos</p>
+                    <p class="collaborator-role">Co-Fundador y Organizador</p>
                 </div>
                 <div class="collaborator-card">
-                    <div class="collaborator-img" style="background-image: url('https://via.placeholder.com/100');"></div>
+                    <div class="collaborator-img" style="background-image: url('https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
                     <h3 class="collaborator-name">LeaksMaster</h3>
                     <p class="collaborator-role">Especialista en Filtraciones</p>
                 </div>
                 <div class="collaborator-card">
-                    <div class="collaborator-img" style="background-image: url('https://via.placeholder.com/100');"></div>
+                    <div class="collaborator-img" style="background-image: url('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
                     <h3 class="collaborator-name">BattleRoyaleFan</h3>
                     <p class="collaborator-role">Estratega Principal</p>
                 </div>
             </div>
             <div style="text-align: center; margin-top: 50px;">
-                <h3 style="margin-bottom: 20px; color: var(--accent);">Nuestros Canales Oficiales</h3>
+                <h3 style="margin-bottom: 20px; color: var(--halloween-orange);">Nuestros Canales Oficiales</h3>
                 <div class="social-links" style="justify-content: center;">
+                    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
                     <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
                     <a href="#" class="social-link"><i class="fab fa-twitch"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
                     <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
@@ -865,7 +1030,7 @@
                     <ul class="footer-links">
                         <li><i class="fas fa-envelope"></i> contacto@warriorsfortnite.com</li>
                         <li><i class="fab fa-whatsapp"></i> +1 234 567 890</li>
-                        <li><i class="fas fa-map-marker-alt"></i> Comunidad Global</li>
+                        <li><i class="fab fa-discord"></i> WarriorsFortnite</li>
                     </ul>
                 </div>
             </div>
@@ -880,30 +1045,30 @@
         // Datos para el carrusel
         const carouselSlides = [
             {
-                image: "https://via.placeholder.com/1200x600",
+                image: "bienvenida.jpg",
                 title: "Bienvenido a WarriorsFortnite",
-                description: "Únete a nuestra comunidad de jugadores de Fortnite y disfruta de todos los modos de juego con nosotros.",
+                description: "Únete a nuestra comunidad de jugadores de Fortnite y disfruta de todos los modos de juego con nosotros. Especialistas en Salvar el Mundo y Battle Royale.",
                 buttonText: "Saber Más",
                 buttonLink: "#acerca"
             },
             {
-                image: "https://via.placeholder.com/1200x600/ff4655/ffffff",
-                title: "Nuevas Filtraciones de la Temporada 5",
-                description: "Descubre las últimas filtraciones de skins, armas y eventos que llegarán próximamente a Fortnite.",
+                image: "fundadores.jpg",
+                title: "Salvar el Mundo - Fundadores",
+                description: "Contamos con un grupo en el cual nos ayudamos a completar misiones diarias y alertas, y notificamos cuando hay una alerta. Somos especialistas en Salvar el Mundo.",
                 buttonText: "Ver Filtraciones",
                 buttonLink: "#filtraciones"
             },
             {
-                image: "https://via.placeholder.com/1200x600/1e1e2e/ffffff",
-                title: "Torneo Comunitario Mensual",
-                description: "Participa en nuestro torneo mensual con premios exclusivos para los mejores jugadores de la comunidad.",
-                buttonText: "Más Información",
-                buttonLink: "#novedades"
+                image: "canal.jpg",
+                title: "Canal de Discord",
+                description: "Tenemos un canal de Discord para mejor organización de partidas, eventos y comunicación con todos los miembros de la comunidad.",
+                buttonText: "Unirse a Discord",
+                buttonLink: "#grupo"
             },
             {
-                image: "https://via.placeholder.com/1200x600/00c8ff/ffffff",
-                title: "Únete a Nuestro Grupo de WhatsApp",
-                description: "Forma parte de nuestro grupo activo donde organizamos partidas, compartimos estrategias y más.",
+                image: "grupos.jpg",
+                title: "Únete a Nuestros Grupos",
+                description: "Forma parte de nuestros grupos activos de WhatsApp y Discord donde organizamos partidas, compartimos estrategias y más.",
                 buttonText: "Solicitar Ingreso",
                 buttonLink: "#reclutamiento"
             }
@@ -974,11 +1139,11 @@
                 });
             });
             
-            // Cambio automático de diapositivas
+            // Cambio automático de diapositivas - 10 SEGUNDOS
             setInterval(function() {
                 currentSlide = (currentSlide + 1) % totalSlides;
                 goToSlide(currentSlide);
-            }, 5000);
+            }, 10000); // 10000 milisegundos = 10 segundos
             
             // Menú móvil
             const mobileMenu = document.querySelector('.mobile-menu');
@@ -986,29 +1151,6 @@
             
             mobileMenu.addEventListener('click', function() {
                 navLinks.classList.toggle('active');
-            });
-            
-            // Filtrado de filtraciones
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            const leakCards = document.querySelectorAll('.leak-card');
-            
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Remover clase active de todos los botones
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    // Agregar clase active al botón clickeado
-                    this.classList.add('active');
-                    
-                    const filter = this.dataset.filter;
-                    
-                    leakCards.forEach(card => {
-                        if (filter === 'all' || card.dataset.category === filter) {
-                            card.style.display = 'block';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
-                });
             });
             
             // Formulario de reclutamiento
