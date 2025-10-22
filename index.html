@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WarriorsFortnite - Comunidad de Fortnite</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variables y estilos generales */
+        :root {
+            --primary: #ff4655;
+            --secondary: #1e1e2e;
+            --accent: #00c8ff;
+            --light: #f5f5f5;
+            --dark: #121212;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            background-color: #e03e4c;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 70, 85, 0.4);
+        }
+        
+        /* Header y navegación */
+        header {
+            background-color: rgba(18, 18, 18, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 25px;
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section con Carrusel */
+        .hero {
+            margin-top: 80px;
+            position: relative;
+            height: 80vh;
+            overflow: hidden;
+        }
+        
+        .carousel {
+            position: relative;
+            height: 100%;
+        }
+        
+        .carousel-slides {
+            display: flex;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+        
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .slide-content {
+            text-align: center;
+            background-color: rgba(18, 18, 18, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+        }
+        
+        .slide-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .slide-content p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+        
+        .carousel-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+        }
+        
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .carousel-dot.active {
+            background-color: var(--primary);
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .carousel-nav:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .carousel-prev {
+            left: 20px;
+        }
+        
+        .carousel-next {
+            right: 20px;
+        }
+        
+        /* Sección de Novedades */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .news-card {
+            background-color: var(--secondary);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .news-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .news-content {
+            padding: 20px;
+        }
+        
+        .news-date {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .news-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        /* Sección Acerca de Nosotros */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-img {
+            flex: 1;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+        }
+        
+        /* Sección Filtraciones */
+        .filters {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            background-color: var(--secondary);
+            color: var(--light);
+            border: none;
+            margin: 0 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active {
+            background-color: var(--primary);
+        }
+        
+        .leaks-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .leak-card {
+            background-color: var(--secondary);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .leak-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .leak-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .leak-info {
+            padding: 15px;
+        }
+        
+        .leak-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+        
+        /* Sección Reclutamiento */
+        .recruitment-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--secondary);
+            padding: 40px;
+            border-radius: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            color: var(--light);
+            font-size: 1rem;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .checkbox-item input {
+            margin-right: 8px;
+        }
+        
+        /* Sección Colaboradores y Canales */
+        .collaborators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .collaborator-card {
+            text-align: center;
+            background-color: var(--secondary);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .collaborator-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .collaborator-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid var(--primary);
+        }
+        
+        .collaborator-name {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+        
+        .collaborator-role {
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-img {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--secondary);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero {
+                height: 60vh;
+            }
+            
+            .slide-content h2 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header y Navegación -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <div class="logo-text">WarriorsFortnite</div>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#novedades">Novedades</a></li>
+                    <li><a href="#acerca">Acerca de Nosotros</a></li>
+                    <li><a href="#filtraciones">Filtraciones</a></li>
+                    <li><a href="#grupo">Grupo de WhatsApp</a></li>
+                    <li><a href="#colaboradores">Colaboradores</a></li>
+                    <li><a href="#reclutamiento">Reclutamiento</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section con Carrusel -->
+    <section id="inicio" class="hero">
+        <div class="carousel">
+            <div class="carousel-slides">
+                <!-- Las diapositivas se agregarán dinámicamente con JavaScript -->
+            </div>
+            <button class="carousel-nav carousel-prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="carousel-nav carousel-next"><i class="fas fa-chevron-right"></i></button>
+            <div class="carousel-controls">
+                <!-- Los puntos se agregarán dinámicamente con JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Novedades -->
+    <section id="novedades" class="section">
+        <div class="container">
+            <h2 class="section-title">Novedades</h2>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-img" style="background-image: url('https://via.placeholder.com/300x200');"></div>
+                    <div class="news-content">
+                        <div class="news-date">15 de Octubre, 2023</div>
+                        <h3 class="news-title">Nuevo Pase de Batalla Temporada 5</h3>
+                        <p>Descubre todos los detalles del nuevo pase de batalla y sus recompensas exclusivas.</p>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-img" style="background-image: url('https://via.placeholder.com/300x200');"></div>
+                    <div class="news-content">
+                        <div class="news-date">12 de Octubre, 2023</div>
+                        <h3 class="news-title">Torneo Comunitario Warriors</h3>
+                        <p>Participa en nuestro torneo mensual con premios exclusivos para los mejores jugadores.</p>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-img" style="background-image: url('https://via.placeholder.com/300x200');"></div>
+                    <div class="news-content">
+                        <div class="news-date">10 de Octubre, 2023</div>
+                        <h3 class="news-title">Actualización de Balance de Armas</h3>
+                        <p>Conoce todos los cambios en el balance de armas de la última actualización.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Acerca de Nosotros -->
+    <section id="acerca" class="section">
+        <div class="container">
+            <h2 class="section-title">Acerca de Nosotros</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>WarriorsFortnite es una comunidad dedicada de jugadores de Fortnite que disfrutan de todos los modos de juego disponibles. Nuestro grupo de WhatsApp es el corazón de nuestra comunidad, donde compartimos estrategias, organizamos partidas y nos mantenemos actualizados con las últimas novedades del juego.</p>
+                    <p>Nos especializamos en:</p>
+                    <ul>
+                        <li>Salvar el Mundo - Misiones cooperativas</li>
+                        <li>Battle Royale - Todos los modos competitivos y casuales</li>
+                        <li>Filtraciones y novedades de la tienda</li>
+                        <li>Eventos especiales y torneos</li>
+                    </ul>
+                    <p>Nuestro objetivo es crear un ambiente amigable y competitivo donde todos los jugadores puedan mejorar y disfrutar del juego juntos.</p>
+                </div>
+                <div class="about-img" style="background-image: url('https://via.placeholder.com/600x400');"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Filtraciones -->
+    <section id="filtraciones" class="section">
+        <div class="container">
+            <h2 class="section-title">Filtraciones</h2>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">Todo</button>
+                <button class="filter-btn" data-filter="skins">Skins</button>
+                <button class="filter-btn" data-filter="armas">Armas</button>
+                <button class="filter-btn" data-filter="eventos">Eventos</button>
+            </div>
+            <div class="leaks-container">
+                <div class="leak-card" data-category="skins">
+                    <div class="leak-img" style="background-image: url('https://via.placeholder.com/250x200');"></div>
+                    <div class="leak-info">
+                        <h3 class="leak-title">Nueva Skin Épica: Cyber Samurai</h3>
+                        <p>Próximamente en la tienda de objetos</p>
+                    </div>
+                </div>
+                <div class="leak-card" data-category="armas">
+                    <div class="leak-img" style="background-image: url('https://via.placeholder.com/250x200');"></div>
+                    <div class="leak-info">
+                        <h3 class="leak-title">Nuevo Rifle de Asalto Mítico</h3>
+                        <p>Estadísticas y características filtradas</p>
+                    </div>
+                </div>
+                <div class="leak-card" data-category="eventos">
+                    <div class="leak-img" style="background-image: url('https://via.placeholder.com/250x200');"></div>
+                    <div class="leak-info">
+                        <h3 class="leak-title">Evento Especial de Halloween</h3>
+                        <p>Detalles del próximo evento temático</p>
+                    </div>
+                </div>
+                <div class="leak-card" data-category="skins">
+                    <div class="leak-img" style="background-image: url('https://via.placeholder.com/250x200');"></div>
+                    <div class="leak-info">
+                        <h3 class="leak-title">Pack de Inicio Temporada 5</h3>
+                        <p>Contenido y precio filtrado</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Grupo de WhatsApp -->
+    <section id="grupo" class="section">
+        <div class="container">
+            <h2 class="section-title">Grupo de WhatsApp</h2>
+            <div class="about-content">
+                <div class="about-img" style="background-image: url('https://via.placeholder.com/600x400');"></div>
+                <div class="about-text">
+                    <p>Nuestro grupo de WhatsApp es el centro de nuestra comunidad. Aquí es donde:</p>
+                    <ul>
+                        <li>Organizamos partidas en todos los modos de juego</li>
+                        <li>Compartimos estrategias y consejos</li>
+                        <li>Informamos sobre novedades y filtraciones</li>
+                        <li>Coordinamos para eventos y torneos</li>
+                        <li>Ayudamos a nuevos jugadores</li>
+                    </ul>
+                    <p>Si quieres unirte a nuestro grupo, completa el formulario de reclutamiento y te contactaremos por WhatsApp para invitarte.</p>
+                    <a href="#reclutamiento" class="btn">Solicitar Ingreso</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Colaboradores y Canales -->
+    <section id="colaboradores" class="section">
+        <div class="container">
+            <h2 class="section-title">Colaboradores y Canales</h2>
+            <div class="collaborators-grid">
+                <div class="collaborator-card">
+                    <div class="collaborator-img" style="background-image: url('https://via.placeholder.com/100');"></div>
+                    <h3 class="collaborator-name">AlexGamer</h3>
+                    <p class="collaborator-role">Líder del Grupo</p>
+                </div>
+                <div class="collaborator-card">
+                    <div class="collaborator-img" style="background-image: url('https://via.placeholder.com/100');"></div>
+                    <h3 class="collaborator-name">FortnitePro</h3>
+                    <p class="collaborator-role">Organizador de Torneos</p>
+                </div>
+                <div class="collaborator-card">
+                    <div class="collaborator-img" style="background-image: url('https://via.placeholder.com/100');"></div>
+                    <h3 class="collaborator-name">LeaksMaster</h3>
+                    <p class="collaborator-role">Especialista en Filtraciones</p>
+                </div>
+                <div class="collaborator-card">
+                    <div class="collaborator-img" style="background-image: url('https://via.placeholder.com/100');"></div>
+                    <h3 class="collaborator-name">BattleRoyaleFan</h3>
+                    <p class="collaborator-role">Estratega Principal</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 50px;">
+                <h3 style="margin-bottom: 20px; color: var(--accent);">Nuestros Canales Oficiales</h3>
+                <div class="social-links" style="justify-content: center;">
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitch"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Reclutamiento -->
+    <section id="reclutamiento" class="section">
+        <div class="container">
+            <h2 class="section-title">Reclutamiento</h2>
+            <div class="recruitment-form">
+                <form id="reclutamiento-form">
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo</label>
+                        <input type="text" id="nombre" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edad">Edad</label>
+                        <input type="number" id="edad" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pais">País</label>
+                        <input type="text" id="pais" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="whatsapp">Número de WhatsApp</label>
+                        <input type="tel" id="whatsapp" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre-fortnite">Nombre de Usuario en Fortnite</label>
+                        <input type="text" id="nombre-fortnite" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>¿Qué modos de juego juegas principalmente?</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="modo-br" name="modos" value="battle-royale">
+                                <label for="modo-br">Battle Royale</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="modo-creativo" name="modos" value="creativo">
+                                <label for="modo-creativo">Modo Creativo</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="modo-salvar" name="modos" value="salvar-mundo">
+                                <label for="modo-salvar">Salvar el Mundo</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="modo-arena" name="modos" value="arena">
+                                <label for="modo-arena">Arena/Competitivo</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="horario">¿En qué horarios sueles jugar?</label>
+                        <input type="text" id="horario" class="form-control" placeholder="Ej: Tardes entre 4pm y 8pm" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="motivo">Motivo por el que quieres unirte a WarriorsFortnite</label>
+                        <textarea id="motivo" class="form-control" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="experiencia">Describe tu experiencia en Fortnite</label>
+                        <textarea id="experiencia" class="form-control" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="expectativas">¿Qué esperas de nuestra comunidad?</label>
+                        <textarea id="expectativas" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Enviar Solicitud</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>WarriorsFortnite</h3>
+                    <p>Comunidad dedicada de jugadores de Fortnite. Únete a nosotros y forma parte de esta increíble experiencia de juego.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#novedades">Novedades</a></li>
+                        <li><a href="#acerca">Acerca de Nosotros</a></li>
+                        <li><a href="#filtraciones">Filtraciones</a></li>
+                        <li><a href="#reclutamiento">Reclutamiento</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> contacto@warriorsfortnite.com</li>
+                        <li><i class="fab fa-whatsapp"></i> +1 234 567 890</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Comunidad Global</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 WarriorsFortnite. Todos los derechos reservados.</p>
+                <p>Fortnite es una marca registrada de Epic Games. Este sitio no está afiliado con Epic Games.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Datos para el carrusel
+        const carouselSlides = [
+            {
+                image: "https://via.placeholder.com/1200x600",
+                title: "Bienvenido a WarriorsFortnite",
+                description: "Únete a nuestra comunidad de jugadores de Fortnite y disfruta de todos los modos de juego con nosotros.",
+                buttonText: "Saber Más",
+                buttonLink: "#acerca"
+            },
+            {
+                image: "https://via.placeholder.com/1200x600/ff4655/ffffff",
+                title: "Nuevas Filtraciones de la Temporada 5",
+                description: "Descubre las últimas filtraciones de skins, armas y eventos que llegarán próximamente a Fortnite.",
+                buttonText: "Ver Filtraciones",
+                buttonLink: "#filtraciones"
+            },
+            {
+                image: "https://via.placeholder.com/1200x600/1e1e2e/ffffff",
+                title: "Torneo Comunitario Mensual",
+                description: "Participa en nuestro torneo mensual con premios exclusivos para los mejores jugadores de la comunidad.",
+                buttonText: "Más Información",
+                buttonLink: "#novedades"
+            },
+            {
+                image: "https://via.placeholder.com/1200x600/00c8ff/ffffff",
+                title: "Únete a Nuestro Grupo de WhatsApp",
+                description: "Forma parte de nuestro grupo activo donde organizamos partidas, compartimos estrategias y más.",
+                buttonText: "Solicitar Ingreso",
+                buttonLink: "#reclutamiento"
+            }
+        ];
+
+        // Inicialización del carrusel
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configurar carrusel
+            const carouselSlidesContainer = document.querySelector('.carousel-slides');
+            const carouselControls = document.querySelector('.carousel-controls');
+            
+            carouselSlides.forEach((slide, index) => {
+                // Crear diapositiva
+                const slideElement = document.createElement('div');
+                slideElement.className = 'carousel-slide';
+                slideElement.style.backgroundImage = `url(${slide.image})`;
+                slideElement.innerHTML = `
+                    <div class="slide-content">
+                        <h2>${slide.title}</h2>
+                        <p>${slide.description}</p>
+                        <a href="${slide.buttonLink}" class="btn">${slide.buttonText}</a>
+                    </div>
+                `;
+                carouselSlidesContainer.appendChild(slideElement);
+                
+                // Crear punto de control
+                const dot = document.createElement('div');
+                dot.className = 'carousel-dot';
+                if (index === 0) dot.classList.add('active');
+                dot.dataset.index = index;
+                carouselControls.appendChild(dot);
+            });
+            
+            // Variables del carrusel
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dots = document.querySelectorAll('.carousel-dot');
+            const totalSlides = slides.length;
+            
+            // Función para cambiar diapositiva
+            function goToSlide(index) {
+                slides.forEach(slide => {
+                    slide.style.transform = `translateX(-${index * 100}%)`;
+                });
+                
+                dots.forEach(dot => dot.classList.remove('active'));
+                dots[index].classList.add('active');
+                
+                currentSlide = index;
+            }
+            
+            // Eventos para los botones de navegación
+            document.querySelector('.carousel-prev').addEventListener('click', function() {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                goToSlide(currentSlide);
+            });
+            
+            document.querySelector('.carousel-next').addEventListener('click', function() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                goToSlide(currentSlide);
+            });
+            
+            // Eventos para los puntos de control
+            dots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index);
+                    goToSlide(index);
+                });
+            });
+            
+            // Cambio automático de diapositivas
+            setInterval(function() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                goToSlide(currentSlide);
+            }, 5000);
+            
+            // Menú móvil
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const navLinks = document.querySelector('.nav-links');
+            
+            mobileMenu.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+            
+            // Filtrado de filtraciones
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const leakCards = document.querySelectorAll('.leak-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remover clase active de todos los botones
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Agregar clase active al botón clickeado
+                    this.classList.add('active');
+                    
+                    const filter = this.dataset.filter;
+                    
+                    leakCards.forEach(card => {
+                        if (filter === 'all' || card.dataset.category === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Formulario de reclutamiento
+            const reclutamientoForm = document.getElementById('reclutamiento-form');
+            
+            reclutamientoForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Obtener datos del formulario
+                const nombre = document.getElementById('nombre').value;
+                const whatsapp = document.getElementById('whatsapp').value;
+                const motivo = document.getElementById('motivo').value;
+                
+                // Crear mensaje para WhatsApp
+                const mensaje = `Hola, mi nombre es ${nombre}. Me gustaría unirme a WarriorsFortnite. Motivo: ${motivo}`;
+                const encodedMessage = encodeURIComponent(mensaje);
+                const whatsappURL = `https://wa.me/1234567890?text=${encodedMessage}`;
+                
+                // Redirigir a WhatsApp
+                window.open(whatsappURL, '_blank');
+                
+                // Mostrar mensaje de éxito
+                alert('Tu solicitud ha sido enviada. Serás redirigido a WhatsApp para completar el proceso.');
+                
+                // Limpiar formulario
+                reclutamientoForm.reset();
+            });
+            
+            // Smooth scrolling para enlaces de navegación
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // Cerrar menú móvil si está abierto
+                        navLinks.classList.remove('active');
+                        
+                        // Calcular posición considerando el header fijo
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const targetPosition = targetElement.offsetTop - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
