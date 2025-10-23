@@ -1474,45 +1474,32 @@
         // Datos para el carrusel - AHORA CON VIDEOS
         const carouselSlides = [
             {
-                video: "random.mp4", // Video con sonido de 3:12 minutos
-                title: "¡Nuevo Video Exclusivo!",
-                description: "Disfruta de este increíble video con sonido que hemos preparado para nuestra comunidad WarriorsFortnite. Duración: 3:12 minutos.",
-                buttonText: "Ver Más",
-                buttonLink: "#clips",
-                hasSound: true, // Nueva propiedad para indicar que tiene sonido
-                duration: 192000 // 3:12 minutos en milisegundos (192 segundos)
-            },
-            {
                 video: "bienvenida.mp4", // Video de bienvenida
                 title: "Bienvenido a WarriorsFortnite",
                 description: "Únete a nuestra comunidad de jugadores de Fortnite y disfruta de todos los modos de juego con nosotros. Especialistas en Salvar el Mundo y Battle Royale.",
                 buttonText: "Saber Más",
-                buttonLink: "#acerca",
-                duration: 13000 // 13 segundos para las demás diapositivas
+                buttonLink: "#acerca"
             },
             {
                 video: "fundadores.mp4", // Video de fundadores
                 title: "Salvar el Mundo - Fundadores",
                 description: "Contamos con un grupo en el cual nos ayudamos a completar misiones diarias y alertas, y notificamos cuando hay una alerta. Somos especialistas en Salvar el Mundo.",
                 buttonText: "Ver Filtraciones",
-                buttonLink: "#filtraciones",
-                duration: 13000
+                buttonLink: "#filtraciones"
             },
             {
                 video: "discord.mp4", // Video de Discord
                 title: "Canal de Discord",
                 description: "Tenemos un canal de Discord para mejor organización de partidas, eventos y comunicación con todos los miembros de la comunidad.",
                 buttonText: "Unirse a Discord",
-                buttonLink: "#grupo",
-                duration: 13000
+                buttonLink: "#grupo"
             },
             {
                 video: "grupos.mp4", // Video de grupos
                 title: "Únete a Nuestros Grupos",
                 description: "Forma parte de nuestros grupos activos de WhatsApp y Discord donde organizamos partidas, compartimos estrategias y más.",
                 buttonText: "Solicitar Ingreso",
-                buttonLink: "#reclutamiento",
-                duration: 13000
+                buttonLink: "#reclutamiento"
             }
         ];
 
@@ -1531,7 +1518,7 @@
                 const videoElement = document.createElement('video');
                 videoElement.className = 'carousel-video';
                 videoElement.autoplay = true;
-                videoElement.muted = !slide.hasSound; // Solo silenciar si no tiene sonido
+                videoElement.muted = true;
                 videoElement.loop = true;
                 videoElement.playsInline = true;
                 
@@ -1572,26 +1559,12 @@
             
             // Función para cambiar diapositiva
             function goToSlide(index) {
-                // Pausar video actual
-                const currentVideo = slides[currentSlide].querySelector('video');
-                if (currentVideo) {
-                    currentVideo.pause();
-                }
-                
-                // Cambiar diapositiva
                 slides.forEach(slide => {
                     slide.style.transform = `translateX(-${index * 100}%)`;
                 });
                 
                 dots.forEach(dot => dot.classList.remove('active'));
                 dots[index].classList.add('active');
-                
-                // Reproducir video de la nueva diapositiva
-                const newVideo = slides[index].querySelector('video');
-                if (newVideo) {
-                    newVideo.currentTime = 0;
-                    newVideo.play();
-                }
                 
                 currentSlide = index;
             }
@@ -1615,30 +1588,11 @@
                 });
             });
             
-            // Cambio automático de diapositivas - TIEMPO VARIABLE
-            let slideInterval;
-            
-            function startSlideInterval() {
-                // Obtener la duración de la diapositiva actual
-                const currentDuration = carouselSlides[currentSlide].duration || 13000;
-                
-                // Limpiar intervalo anterior
-                if (slideInterval) {
-                    clearInterval(slideInterval);
-                }
-                
-                // Establecer nuevo intervalo con la duración de la diapositiva actual
-                slideInterval = setInterval(function() {
-                    currentSlide = (currentSlide + 1) % totalSlides;
-                    goToSlide(currentSlide);
-                    
-                    // Reiniciar el intervalo con la duración de la nueva diapositiva
-                    startSlideInterval();
-                }, currentDuration);
-            }
-            
-            // Iniciar el intervalo
-            startSlideInterval();
+            // Cambio automático de diapositivas - 13 SEGUNDOS (como solicitaste)
+            setInterval(function() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                goToSlide(currentSlide);
+            }, 13000); // 13000 milisegundos = 13 segundos
             
             // Menú móvil
             const mobileMenu = document.querySelector('.mobile-menu');
