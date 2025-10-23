@@ -192,11 +192,20 @@
             min-width: 100%;
             height: 100%;
             position: relative;
-            background-size: cover;
-            background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
+        }
+        
+        .carousel-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
         }
         
         .slide-content {
@@ -207,6 +216,7 @@
             max-width: 700px;
             border: 2px solid var(--halloween-orange);
             box-shadow: 0 0 20px rgba(255, 123, 37, 0.5);
+            z-index: 1;
         }
         
         .slide-content h2 {
@@ -227,6 +237,7 @@
             left: 50%;
             transform: translateX(-50%);
             display: flex;
+            z-index: 10;
         }
         
         .carousel-dot {
@@ -260,6 +271,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 10;
         }
         
         .carousel-nav:hover {
@@ -1459,35 +1471,48 @@
     </footer>
 
     <script>
-        // Datos para el carrusel
+        // Datos para el carrusel - AHORA CON VIDEOS
         const carouselSlides = [
             {
-                image: "bienvenida.jpg",
+                video: "random.mp4", // Video con sonido de 3:12 minutos
+                title: "¡Nuevo Video Exclusivo!",
+                description: "Disfruta de este increíble video con sonido que hemos preparado para nuestra comunidad WarriorsFortnite. Duración: 3:12 minutos.",
+                buttonText: "Ver Más",
+                buttonLink: "#clips",
+                hasSound: true, // Nueva propiedad para indicar que tiene sonido
+                duration: 192000 // 3:12 minutos en milisegundos (192 segundos)
+            },
+            {
+                video: "bienvenida.mp4", // Video de bienvenida
                 title: "Bienvenido a WarriorsFortnite",
                 description: "Únete a nuestra comunidad de jugadores de Fortnite y disfruta de todos los modos de juego con nosotros. Especialistas en Salvar el Mundo y Battle Royale.",
                 buttonText: "Saber Más",
-                buttonLink: "#acerca"
+                buttonLink: "#acerca",
+                duration: 13000 // 13 segundos para las demás diapositivas
             },
             {
-                image: "fundadores.jpg",
+                video: "fundadores.mp4", // Video de fundadores
                 title: "Salvar el Mundo - Fundadores",
                 description: "Contamos con un grupo en el cual nos ayudamos a completar misiones diarias y alertas, y notificamos cuando hay una alerta. Somos especialistas en Salvar el Mundo.",
                 buttonText: "Ver Filtraciones",
-                buttonLink: "#filtraciones"
+                buttonLink: "#filtraciones",
+                duration: 13000
             },
             {
-                image: "canal.jpg",
+                video: "discord.mp4", // Video de Discord
                 title: "Canal de Discord",
                 description: "Tenemos un canal de Discord para mejor organización de partidas, eventos y comunicación con todos los miembros de la comunidad.",
                 buttonText: "Unirse a Discord",
-                buttonLink: "#grupo"
+                buttonLink: "#grupo",
+                duration: 13000
             },
             {
-                image: "grupos.jpg",
+                video: "grupos.mp4", // Video de grupos
                 title: "Únete a Nuestros Grupos",
                 description: "Forma parte de nuestros grupos activos de WhatsApp y Discord donde organizamos partidas, compartimos estrategias y más.",
                 buttonText: "Solicitar Ingreso",
-                buttonLink: "#reclutamiento"
+                buttonLink: "#reclutamiento",
+                duration: 13000
             }
         ];
 
@@ -1498,17 +1523,37 @@
             const carouselControls = document.querySelector('.carousel-controls');
             
             carouselSlides.forEach((slide, index) => {
-                // Crear diapositiva
+                // Crear diapositiva con VIDEO
                 const slideElement = document.createElement('div');
                 slideElement.className = 'carousel-slide';
-                slideElement.style.backgroundImage = `url(${slide.image})`;
-                slideElement.innerHTML = `
-                    <div class="slide-content">
-                        <h2>${slide.title}</h2>
-                        <p>${slide.description}</p>
-                        <a href="${slide.buttonLink}" class="btn">${slide.buttonText}</a>
-                    </div>
+                
+                // Crear elemento de video
+                const videoElement = document.createElement('video');
+                videoElement.className = 'carousel-video';
+                videoElement.autoplay = true;
+                videoElement.muted = !slide.hasSound; // Solo silenciar si no tiene sonido
+                videoElement.loop = true;
+                videoElement.playsInline = true;
+                
+                const sourceElement = document.createElement('source');
+                sourceElement.src = slide.video;
+                sourceElement.type = 'video/mp4';
+                
+                videoElement.appendChild(sourceElement);
+                videoElement.innerHTML += 'Tu navegador no soporta el elemento de video.';
+                
+                slideElement.appendChild(videoElement);
+                
+                // Agregar contenido sobre el video
+                const contentElement = document.createElement('div');
+                contentElement.className = 'slide-content';
+                contentElement.innerHTML = `
+                    <h2>${slide.title}</h2>
+                    <p>${slide.description}</p>
+                    <a href="${slide.buttonLink}" class="btn">${slide.buttonText}</a>
                 `;
+                
+                slideElement.appendChild(contentElement);
                 carouselSlidesContainer.appendChild(slideElement);
                 
                 // Crear punto de control
@@ -1527,12 +1572,26 @@
             
             // Función para cambiar diapositiva
             function goToSlide(index) {
+                // Pausar video actual
+                const currentVideo = slides[currentSlide].querySelector('video');
+                if (currentVideo) {
+                    currentVideo.pause();
+                }
+                
+                // Cambiar diapositiva
                 slides.forEach(slide => {
                     slide.style.transform = `translateX(-${index * 100}%)`;
                 });
                 
                 dots.forEach(dot => dot.classList.remove('active'));
                 dots[index].classList.add('active');
+                
+                // Reproducir video de la nueva diapositiva
+                const newVideo = slides[index].querySelector('video');
+                if (newVideo) {
+                    newVideo.currentTime = 0;
+                    newVideo.play();
+                }
                 
                 currentSlide = index;
             }
@@ -1556,11 +1615,30 @@
                 });
             });
             
-            // Cambio automático de diapositivas - 10 SEGUNDOS
-            setInterval(function() {
-                currentSlide = (currentSlide + 1) % totalSlides;
-                goToSlide(currentSlide);
-            }, 10000); // 10000 milisegundos = 10 segundos
+            // Cambio automático de diapositivas - TIEMPO VARIABLE
+            let slideInterval;
+            
+            function startSlideInterval() {
+                // Obtener la duración de la diapositiva actual
+                const currentDuration = carouselSlides[currentSlide].duration || 13000;
+                
+                // Limpiar intervalo anterior
+                if (slideInterval) {
+                    clearInterval(slideInterval);
+                }
+                
+                // Establecer nuevo intervalo con la duración de la diapositiva actual
+                slideInterval = setInterval(function() {
+                    currentSlide = (currentSlide + 1) % totalSlides;
+                    goToSlide(currentSlide);
+                    
+                    // Reiniciar el intervalo con la duración de la nueva diapositiva
+                    startSlideInterval();
+                }, currentDuration);
+            }
+            
+            // Iniciar el intervalo
+            startSlideInterval();
             
             // Menú móvil
             const mobileMenu = document.querySelector('.mobile-menu');
